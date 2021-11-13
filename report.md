@@ -8,22 +8,22 @@
   - https://stackoverflow.com: no 
   - https://github.com: no 
   - https://about.gitlab.com: no 
-  - https://www.tutorialspoint.com
+  - https://www.tutorialspoint.com: no
 - c
   - https://stackoverflow.com: February 2, 2022
   - https://github.com: March 31, 2022
   - https://about.gitlab.com: November 19, 2022 
-  - https://www.tutorialspoint.com
+  - https://www.tutorialspoint.com: December 1, 2022
 - d
   - https://stackoverflow.com: SHA-256 with RSA Encryption 
   - https://github.com: ECDSA with SHA-256 
   - https://about.gitlab.com: SHA-256 with RSA Encryption
-  - https://www.tutorialspoint.com
+  - https://www.tutorialspoint.com: SHA-256 with RSA Encryption
 - e
   - https://stackoverflow.com: RSA 
   - https://github.com: Elliptic Curve P-256
   - https://about.gitlab.com: RSA
-  - https://www.tutorialspoint.com
+  - https://www.tutorialspoint.com: RSA
 - f
   - https://stackoverflow.com: extracted with openssl
 ```
@@ -56,7 +56,7 @@ r6utjDcaK2G8/GFPz9eOvLUu4jkZA99U3NkFgjEEj8muahmghp8+3VYFshNcUz2w
 VwIDAQAB
 -----END PUBLIC KEY-----
 ```
-  - https://www.tutorialspoint.com: extracted with openssl
+  - https://www.tutorialspoint.com: extracted withopenssl
 ```
 -----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtnVz0wp+fYpFksH2WAQp
@@ -69,6 +69,5 @@ SQIDAQAB
 -----END PUBLIC KEY-----
 ```
 ## Question 2
-[giallery.com](https://giallery.com/) found [here](https://www.sigmamedia.net/badssl/Iran%20(Islamic%20Republic%20of).html). certificate is also included along side this report.
 
 ## Question 3
