@@ -6,4 +6,4 @@
 - [ ] Dockerize
 
 ## Notes:
-Question 1 to 3 is located in certs directory.
+Question 1 to 3 is located in `questions` directory.
