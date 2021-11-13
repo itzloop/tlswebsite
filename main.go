@@ -44,11 +44,15 @@ func handler(r http.ResponseWriter, _ *http.Request) {
 }
 
 func main() {
-	addr := os.Args[1]
+	addr, exists := os.LookupEnv("ADDR")
+	if !exists || addr == "" {
+		addr = ":8080"
+	}
 
 	fs := http.FileServer(http.Dir(path.Join("./", "static/")))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 	http.HandleFunc("/", handler)
 
-	http.ListenAndServe(addr, nil)
+	log.Printf("server is starting at %s\n", addr)
+	log.Fatal(http.ListenAndServe(addr, nil))
 }

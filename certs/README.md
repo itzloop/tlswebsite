@@ -72,3 +72,17 @@ SQIDAQAB
 [giallery.com](https://giallery.com/) found [here](https://www.sigmamedia.net/badssl/Iran%20(Islamic%20Republic%20of).html). certificate is also included along side this report.
 
 ## Question 3
+
+- en.wikipedia.com: extracted with openssl
+  - Serial Number: 031A6B6D125D7706BC61A22BCE280534
+      Revocation Date: Jun 17 15:09:35 2021 GMT
+  - Serial Number: 0C40FB9449BF2E9D2F2912BE9CA27924
+      Revocation Date: Jun 17 15:09:36 2021 GMT
+  - Serial Number: 04B439CB22317491A5AB479E9F5BB629
+      Revocation Date: Jun 22 15:14:56 2021 GMT
+  - Serial Number: 0E066FD67EEC3E47699DAC681C4A2D5B
+      Revocation Date: Jun 22 15:38:18 2021 GMT
+  - Serial Number: 0A461ABB1944D9E52D7AC59FB13238C9
+      Revocation Date: Jun 29 16:13:31 2021 GMT
+- dictionary.com: no crl uri was provided by the certificate
+
