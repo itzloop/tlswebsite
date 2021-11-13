@@ -90,7 +90,7 @@ $ sudo ufw enable
 # check you firewall status
 $ sudo ufw status
 ```
-![proof](drive.google.com/uc?id=1KkMS5MPUz4rueYwyfg3Dzc9rCOozqJbo)
+![proof](https_proof.png)
 - Enjoy your secure website :). It's still sad that i couldn't make docker compose work :(.
 ## Notes:
 Question 1 to 3 are located in `questions` directory.
