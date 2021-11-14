@@ -17,22 +17,22 @@
   - https://stackoverflow.com: no 
   - https://github.com: no 
   - https://about.gitlab.com: no 
-  - https://www.tutorialspoint.com
+  - https://www.tutorialspoint.com: no
 - c
   - https://stackoverflow.com: February 2, 2022
   - https://github.com: March 31, 2022
   - https://about.gitlab.com: November 19, 2022 
-  - https://www.tutorialspoint.com
+  - https://www.tutorialspoint.com: December 1, 2022
 - d
   - https://stackoverflow.com: SHA-256 with RSA Encryption 
   - https://github.com: ECDSA with SHA-256 
   - https://about.gitlab.com: SHA-256 with RSA Encryption
-  - https://www.tutorialspoint.com
+  - https://www.tutorialspoint.com: SHA-256 with RSA Encryption
 - e
   - https://stackoverflow.com: RSA 
   - https://github.com: Elliptic Curve P-256
   - https://about.gitlab.com: RSA
-  - https://www.tutorialspoint.com
+  - https://www.tutorialspoint.com: RSA
 - f
   - https://stackoverflow.com: extracted with openssl
 ```
@@ -167,9 +167,9 @@ server {
 - Then i pulled the image with `docker pull sinashk/tlswebsite`. You might need to login to your account for this one with `docker login` and you might also need a vpn ;)
 - After the image was pulled, we can simply run it with:
 ```
-$ docker run -p 8080:8080 sinashk/tlswebsite
+$ docker run -p 127.0.0.1:8080:8080 sinashk/tlswebsite
 ```
-- Well there is one more thing we need block other traffics otherwise some can ignore tls by going straigh to port 8080 so we need to activate our firewall. I will use `ufw`.
+- Well there is one more thing we need block other traffics otherwise some can ignore tls by going straigh to port 8080 so we need to activate our firewall. I will use `ufw`. NOTE: `ufw` cannot prevent traffic to access a port mapped by docker since docker modifies iptables directly. So with an enabled firewall you can still visit `shantech.ir:8080` and bypass `TLS` that's why we need to add `127.0.0.1` at first to restrict the traffic to be coming from the machine itself.
 ```
 # IMPRTANT otherwise you will lose your session and probably won't be able to connect to your sever any more
 $ sudo ufw allow ssh 
@@ -180,7 +180,9 @@ $ sudo ufw enable
 # check you firewall status
 $ sudo ufw status
 ```
+
 ![proof](https_proof.png)
+
 - Enjoy your secure website :). It's still sad that i couldn't make docker compose work :(.
 
 
@@ -195,14 +197,17 @@ After selecting the interface we need to filter the output because it's not on L
 ```
 ip.dst == www.shantech.ir or ip.src == www.shantech.ir
 ```
+
 ![Wireshark filter](wireshark_filter.png)
 
 It's kinda weird to see `ip.dst` being equal to `www.shantech.ir` but it is what it is.
 
 Now if we visit `www.shantech.ir` and come back to `wireshark` we will see that there are a lot of packets captured to wireshark.
+
 ![wire shark packets](wireshark_packets.png)
 
 You can see `Client Hello` and `Server Hello` which belongs to `TLS`. Here is some of the metadata attached to `Client Hello Packet`:
+
 ![Wireshark client hello](client_hello.png)
 
 Things like:
@@ -212,6 +217,7 @@ Things like:
 - ...
 
 And Here is `Sever Hello`:
+
 ![Wireshark server hello](server_hello.png)
 
 Things like:
@@ -219,7 +225,27 @@ Things like:
 - Session ID
 - ...
 
-## Notes:
-Question 1 to 3 are located in `questions` directory.
+Now to decrypt `TLS`, we use `SSL Log File` since it works for most situations. All we need to do is set an environment variable and then open a browser and visit the website.
+```
+# set the environment variable
+$ export SSLKEYLOGFILE=/home/loop/sslkeylogfile
+
+# now open a browser. keep in mind that the browser 
+# should be opened from this shell since you set 
+# the variable in this shell not hte entire system
+$ firefox https://www.shantech.ir
+```
+
+Now we just need to point `wireshark` to that file. Go to `Edit > Prefernces` and under protocol section find `TLS` and write the path of the `sslkeylogfile` to `(Pre)-Master-Secret log filename`
+
+![setting key log](wireshark_set_keylog.png) 
+
+After saving the changes we can see that packets are decrypted and here is proof of that.
+
+
+![wireshark decrypt proof](wireshark_decrypt_proof.png)
+
+
+Now after decrypting `TLS` packets, the protocol encapsulated inside of it is visible and you can see it in the above picture as well.
 
 
