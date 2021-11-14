@@ -86,3 +86,39 @@ SQIDAQAB
       Revocation Date: Jun 29 16:13:31 2021 GMT
 - dictionary.com: no crl uri was provided by the certificate
 
+## Question 4
+
+## Question 5
+First of all this is public ip so i will not share it in this document and configure wireshark to show the domain name instead of IP address. I will also hide the IP in packets. By going to `View > Name Resolution` and checking `Resolve Network Addresses` IP addresses will be replaced by domain name. Now my system's name is `loopspc` so you will see this instead of `192.168.1.111` which is my private IP address.
+
+Now when you open up `wireshark` you will be presented with a list of network devices to select and capture packet on. My network interface is `enp9s0`. You can find yours by running `ip addr` in the `terminal`.
+
+![Wireshark select net dev](wireshark_nic.png)
+
+After selecting the interface we need to filter the output because it's not on Loopback and there so many packets we can filter based on destination IP and source IP, and we don't need to specify the IP since we have checked that box before. So type this filter in:
+```
+ip.dst == www.shantech.ir or ip.src == www.shantech.ir
+```
+![Wireshark filter](wireshark_filter.png)
+
+It's kinda weird to see `ip.dst` being equal to `www.shantech.ir` but it is what it is.
+
+Now if we visit `www.shantech.ir` and come back to `wireshark` we will see that there are a lot of packets captured to wireshark.
+![wire shark packets](wireshark_packets.png)
+
+You can see `Client Hello` and `Server Hello` which belongs to `TLS`. Here is some of the metadata attached to `Client Hello Packet`:
+![Wireshark client hello](client_hello.png)
+
+Things like:
+- session token
+- cipher suites
+- suported versions
+- ...
+
+And Here is `Sever Hello`:
+![Wireshark server hello](server_hello.png)
+
+Things like:
+- Selected cipher suit
+- Session ID
+
